@@ -5,7 +5,7 @@ import { Routes, Route, useNavigate } from 'react-router-dom';
 import { GoogleOAuthProvider } from '@react-oauth/google';
 
 // Components
-import Home from './components/Home';
+import Home from './container/Home';
 import Login from './components/Login';
 
 const App = () => {

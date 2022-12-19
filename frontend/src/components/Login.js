@@ -1,16 +1,38 @@
 import React from "react";
+
+// Installed dependencies
 import { GoogleLogin } from "@react-oauth/google";
 import { useNavigate } from "react-router-dom";
-import { FcGoogle } from "react-icons/fc";
+import jwt_decode from "jwt-decode"; // Decode jwt token response from OAuth
 
 // Import assets
 import shareVideo from "../assets/share.mp4";
 import logo from "../assets/logowhite.png";
 
+// Sanity client
+import { client } from "../client";
+
 
 const Login = () => {
+  const navigate = useNavigate();
+
   const responseGoogle = response => {
-    console.log(response);
+    localStorage.setItem('user', JSON.stringify(response));
+
+    let profileObject = jwt_decode(response.credential);
+    const { name, picture, sub: userId  } = profileObject;
+
+    const doc = {
+      _id: userId,
+      _type: 'user',
+      userName: name,
+      image: picture
+    };
+
+    client.createIfNotExists(doc)
+      .then(() => {
+        navigate("/", { replace: true });
+      });
   };
 
   return (
