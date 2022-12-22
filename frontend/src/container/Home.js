@@ -16,14 +16,14 @@ import { client } from "../client";
 
 // Utils
 import { userQuery } from "../utils/data";
+import { fetchUser } from "../utils/fetchUser";
 
 const Home = () => {
   const [toggleSidebar, setToggleSidebar] = useState(false);
   const [user, setUser] = useState(null);
   const scrollRef = useRef(null);
+  const userInfo = fetchUser();
 
-  const userInfo = localStorage.getItem("user") !== "undefined" ? JSON.parse(localStorage.getItem("user")) : localStorage.clear();
-  
   useEffect(() => {
     const { sub: userId } = jwt_decode(userInfo?.credential);
     const query = userQuery(userId);
