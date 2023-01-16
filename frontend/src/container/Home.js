@@ -5,7 +5,7 @@ import { Link, Route, Routes } from "react-router-dom";
 import jwt_decode from "jwt-decode";
 
 // Assets
-import logo from "../assets/logo.png";
+import logo from "../assets/logo-red.png";
 
 // Components
 import { Sidebar, UserProfile } from "../components";

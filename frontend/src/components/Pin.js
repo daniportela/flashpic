@@ -18,7 +18,7 @@ const Pin = ({ pin: { postedBy, image, _id, destination, save } }) => {
   const user = fetchUser();
   const userId = jwt_decode(user.credential).sub;
 
-  const alreadySaved = !!(save?.filter(item => item.postedBy._id === userId))?.length;
+  const alreadySaved = !!(save?.filter(item => item?.postedBy?._id === userId))?.length;
 
   const savePin = id => {
     if (!alreadySaved) {
